@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Booking Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 flex items-center justify-center h-screen font-sans">
+
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-extrabold text-blue-600"><i class="fa-solid fa-hospital"></i> CarePortal</h1>
+            <p class="text-gray-500 mt-2 text-sm">Secure Login to Hospital Services</p>
+        </div>
+
+        {% if error %}
+            <div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm text-center">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/login" class="space-y-5">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" name="username" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">
+                Sign In
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-600">
+            Are you a new patient? 
+            <a href="/register" class="text-blue-600 hover:text-blue-800 font-semibold">Register here</a>
+        </p>
+        <div class="mt-4 text-xs text-gray-400 text-center">
+            Demo Logins: <br>
+            <b>admin / admin123</b> <br>
+            <b>drsmith / doc123</b> | <b>drjohn / doc123</b> | <b>drjones / doc123</b><br>
+            <b>patient1 / pat123</b>
+        </div>
+    </div>
+
+</body>
+</html>

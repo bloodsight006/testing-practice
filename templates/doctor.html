@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - CarePortal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-indigo-700 p-4 text-white shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold"><i class="fa-solid fa-user-doctor"></i> Doctor Panel</h1>
+            <div>
+                <span class="mr-4">Welcome, <b>{{ name }}</b></span>
+                <a href="/logout" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600 transition">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 px-4">
+        <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-indigo-500">
+            <h2 class="text-xl font-bold mb-4 text-gray-800"><i class="fa-solid fa-clipboard-list"></i> Scheduled Patients & History</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {% for app in appointments %}
+                <div class="bg-gray-50 border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition">
+                    <div class="flex justify-between items-start mb-2">
+                        <h3 class="text-lg font-bold text-indigo-700">{{ app.pat_name }}</h3>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs px-2 py-1 rounded-full">{{ app.app_date }} {{ app.app_time }}</span>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-1">Medical History Form</p>
+                        <p class="text-sm text-gray-700 bg-white p-2 rounded border border-gray-100">{{ app.medical_history }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="col-span-full py-8 text-center text-gray-500">
+                    <i class="fa-solid fa-inbox text-4xl mb-2 text-gray-300"></i>
+                    <p>No appointments booked yet.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

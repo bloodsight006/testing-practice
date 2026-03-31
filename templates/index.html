@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Appointment Booking</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 20px; }
+        .container { background: #fff; padding: 20px; margin: auto; max-width: 400px; box-shadow: 0 0 10px rgba(0,0,0,0.1); border-radius: 8px;}
+        h2 { text-align: center; color: #333; }
+        input, select, button { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        button { background: #5cb85c; color: #fff; border: none; cursor: pointer; }
+        button:hover { background: #4cae4c; }
+        #message { margin-top: 15px; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Book Appointment</h2>
+        <input type="text" id="username" placeholder="Username (e.g., patient1)">
+        <input type="password" id="password" placeholder="Password (e.g., password123)">
+        <select id="doctor">
+            <option value="dr_smith">Dr. Smith</option>
+            <option value="dr_jones">Dr. Jones</option>
+        </select>
+        <select id="time_slot">
+            <option value="10:00 AM">10:00 AM</option>
+            <option value="11:00 AM">11:00 AM</option>
+        </select>
+        <button onclick="book()">Submit</button>
+        <div id="message"></div>
+    </div>
+    
+    <script>
+        function book() {
+            const data = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                doctor: document.getElementById('doctor').value,
+                time_slot: document.getElementById('time_slot').value
+            };
+            
+            fetch('/book', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                let msgDiv = document.getElementById('message');
+                msgDiv.innerText = res.message;
+                msgDiv.style.color = res.status === "success" ? "green" : "red";
+                console.log("Path Traversed: ", res.path);
+            })
+            .catch(err => console.error(err));
+        }
+    </script>
+</body>
+</html>

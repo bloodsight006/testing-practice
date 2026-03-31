@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration - Hospital Booking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 flex items-center justify-center h-screen font-sans">
+
+    <div class="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+        <div class="text-center mb-6">
+            <h1 class="text-3xl font-extrabold text-green-600"><i class="fa-solid fa-user-plus"></i> Join Us</h1>
+            <p class="text-gray-500 mt-2 text-sm">Register as a New Patient</p>
+        </div>
+
+        {% if error %}
+            <div class="mb-4 p-3 bg-red-100 text-red-700 rounded text-sm text-center">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" action="/register" class="space-y-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Full Name</label>
+                <input type="text" name="name" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Username</label>
+                <input type="text" name="username" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" name="password" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-green-500 focus:border-green-500">
+            </div>
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300 shadow-md">
+                Register
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-sm text-gray-600">
+            Already have an account? 
+            <a href="/login" class="text-green-600 hover:text-green-800 font-semibold">Login here</a>
+        </p>
+    </div>
+
+</body>
+</html>

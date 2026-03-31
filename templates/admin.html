@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - CarePortal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-gray-800 p-4 text-white shadow-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold"><i class="fa-solid fa-chart-line"></i> Admin Center</h1>
+            <a href="/logout" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600 transition">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 px-4">
+        
+        <!-- Stats Widgets -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500 flex items-center">
+                <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                    <i class="fa-solid fa-money-bill-wave text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide font-bold">Total Revenue</p>
+                    <p class="text-3xl font-extrabold text-gray-800">${{ stats.total_fees or 0 }}</p>
+                </div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md border-l-4 border-blue-500 flex items-center">
+                <div class="p-3 rounded-full bg-blue-100 text-blue-500 mr-4">
+                    <i class="fa-solid fa-calendar-check text-2xl"></i>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-500 uppercase tracking-wide font-bold">Total Appointments</p>
+                    <p class="text-3xl font-extrabold text-gray-800">{{ stats.appt_count or 0 }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Appointments List -->
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-gray-800"><i class="fa-solid fa-list"></i> All Appointments List</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white">
+                    <thead class="bg-gray-800 text-white text-left">
+                        <tr>
+                            <th class="py-3 px-4 border-b">ID</th>
+                            <th class="py-3 px-4 border-b">Patient</th>
+                            <th class="py-3 px-4 border-b">Doctor</th>
+                            <th class="py-3 px-4 border-b">Schedule</th>
+                            <th class="py-3 px-4 border-b">Fee</th>
+                            <th class="py-3 px-4 border-b">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        {% for app in appointments %}
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="py-2 px-4 text-gray-500">#{{ app.id }}</td>
+                            <td class="py-2 px-4 font-bold">{{ app.pat_name }}</td>
+                            <td class="py-2 px-4">{{ app.doc_name }}</td>
+                            <td class="py-2 px-4"><span class="text-sm bg-gray-100 px-2 py-1 rounded">{{ app.app_date }} {{ app.app_time }}</span></td>
+                            <td class="py-2 px-4 text-green-600 font-bold">${{ app.fee }}</td>
+                            <td class="py-2 px-4"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">{{ app.status }}</span></td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="py-4 text-center text-gray-500">No data available.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>
